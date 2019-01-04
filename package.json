@@ -1,0 +1,20 @@
+{
+  "name": "WpServer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon bin/www"
+  },
+  "repository": "https://github.com/cuo2017/WpServer.git",
+  "author": "cyhwill <cuo2017@163.com>",
+  "license": "MIT",
+  "dependencies":{
+    "body-parser": "^1.18.3",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.16.4",
+    "fs": "^0.0.1-security",
+    "mongoose": "^5.4.2",
+    "path": "^0.12.7"
+  }
+
+}

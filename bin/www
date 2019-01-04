@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+// 注释环境变量
+var app = require('../index.js');
+
+app.listen(7000, function(){
+	console.log('app started, Lisening on the port:7000');
+});
