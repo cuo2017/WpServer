@@ -8,13 +8,18 @@
   "repository": "https://github.com/cuo2017/WpServer.git",
   "author": "cyhwill <cuo2017@163.com>",
   "license": "MIT",
-  "dependencies":{
+  "dependencies": {
+    "aliyun-api-gateway": "^1.1.6",
     "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
     "connect-multiparty": "^2.2.0",
     "express": "^4.16.4",
     "fs": "^0.0.1-security",
+    "http": "^0.0.0",
+    "moment": "^2.23.0",
     "mongoose": "^5.4.2",
-    "path": "^0.12.7"
+    "node-fetch": "^2.3.0",
+    "path": "^0.12.7",
+    "request": "^2.88.0"
   }
-
 }
