@@ -99,6 +99,30 @@ var dataController = {
 		// 		return res.json(result);
 		// 	}
 		// });
+		var clientServerOptions = {
+	        url: 'https://api.seniverse.com/v3/weather/now.json?key=5dj6pbdppzrc72kp&location=mianyang&language=zh-Hans&unit=c',
+	        method: 'GET',
+	    }
+	    request(clientServerOptions, function (error, response) {
+	        var data = JSON.parse(response.body);
+	        var data2 = data.results[0];
+	        var instant_data = {
+				location: data2.location.name,
+				weather: data2.now.text,
+				temp: data2.now.temperature,
+				feel: data2.now.feels_like,
+				pressure: data2.now.pressure,
+				humidity: data2.now.humidity,
+				visibility: data2.now.visibility,
+				wind_direction: data2.now.wind_direction,
+				wind_direction_degree: data2.now.wind_direction_degree,
+				wind_speed: data2.now.wind_speed,
+				wind_scale: data2.now.wind_scale,
+				update_time: data2.last_update,
+			}
+	        console.log(instant_data);
+	        return res.json(instant_data);
+	    });
 
 		
 	}
@@ -109,19 +133,19 @@ var dataController = {
 // ====
 
 
-var blogSchema = mongoose.Schema({
-	number: String,
-	date: String,
-	location: String,
-	title: String,
-	kind: String,
-	content: String,
-	img: String,
-	good: String,
-	description: String,
-	comment: [],
-});
-var Blog = mongoose.model("blog",blogSchema);
+// var blogSchema = mongoose.Schema({
+// 	number: String,
+// 	date: String,
+// 	location: String,
+// 	title: String,
+// 	kind: String,
+// 	content: String,
+// 	img: String,
+// 	good: String,
+// 	description: String,
+// 	comment: [],
+// });
+// var Blog = mongoose.model("blog",blogSchema);
 
 var userSchema = mongoose.Schema({
 	username: String,
@@ -160,69 +184,70 @@ var userController = {
 		});
 	},
 }
-var blogController = {
 
-	// blogs
+// var blogController = {
 
-	getBlog: function(req,res,next){
-		Blog.find().exec(function(err,docs){
-			console.log("获取博客成功");
-			return res.json(docs);
-		});
-	},
-	getBlogByConditions: function(req,res,next){
-		var condition = req.body;
-		Blog.find(condition).exec(function(err,docs){
-			console.log("获取"+condition+"博客成功");
-			return res.json(docs);
-		});
-	},
-	addBlog: function(req,res,next){
-		var blog = new Blog(req.body);
-		console.log(req.body);
-		blog.save(function(err,docs){
-			console.log(docs);
-			return res.json(docs);
-		});
+// 	// blogs
 
-	},
-	deleteBlog: function(req,res,next){
-		var condition = req.body;
-		Blog.remove(condition,function(err,docs){
-			console.log('删除序号为' + condition.number + "博客");
-			return res.json(docs);
-		});
-	},
-	updateBlog:function(req,res,next){
-		var condition = req.body.condition;
-		var update = req.body.update;
-		Blog.update(condition,{$set:update}).exec(function(err,docs){
-			console.log('更新序号为' + condition + '的博客，更新内容为' + update);
-			// return res.json(docs);
-		});
+// 	getBlog: function(req,res,next){
+// 		Blog.find().exec(function(err,docs){
+// 			console.log("获取博客成功");
+// 			return res.json(docs);
+// 		});
+// 	},
+// 	getBlogByConditions: function(req,res,next){
+// 		var condition = req.body;
+// 		Blog.find(condition).exec(function(err,docs){
+// 			console.log("获取"+condition+"博客成功");
+// 			return res.json(docs);
+// 		});
+// 	},
+// 	addBlog: function(req,res,next){
+// 		var blog = new Blog(req.body);
+// 		console.log(req.body);
+// 		blog.save(function(err,docs){
+// 			console.log(docs);
+// 			return res.json(docs);
+// 		});
 
-		Blog.find().exec(function(err,docs){
-			return res.json(docs);
-		});
-	}
+// 	},
+// 	deleteBlog: function(req,res,next){
+// 		var condition = req.body;
+// 		Blog.remove(condition,function(err,docs){
+// 			console.log('删除序号为' + condition.number + "博客");
+// 			return res.json(docs);
+// 		});
+// 	},
+// 	updateBlog:function(req,res,next){
+// 		var condition = req.body.condition;
+// 		var update = req.body.update;
+// 		Blog.update(condition,{$set:update}).exec(function(err,docs){
+// 			console.log('更新序号为' + condition + '的博客，更新内容为' + update);
+// 			// return res.json(docs);
+// 		});
+
+// 		Blog.find().exec(function(err,docs){
+// 			return res.json(docs);
+// 		});
+// 	}
 
 
-}
+// }
 app.route('/addUser').post(userController.addUser);
 
 app.route('/getUser').get(userController.getUser);
 
 app.route('/updateUser').post(userController.updateUser);
 
-app.route('/getBlog').get(blogController.getBlog);
+// app.route('/getBlog').get(blogController.getBlog);
 
-app.route('/getBlogByConditions').post(blogController.getBlogByConditions);
+// app.route('/getBlogByConditions').post(blogController.getBlogByConditions);
 
-app.route('/addBlog').post(blogController.addBlog);
+// app.route('/addBlog').post(blogController.addBlog);
 
-app.route('/deleteBlog').post(blogController.deleteBlog);
+// app.route('/deleteBlog').post(blogController.deleteBlog);
 
-app.route('/updateBlog').post(blogController.updateBlog);
+// app.route('/updateBlog').post(blogController.updateBlog);
 
 
 app.route('/getData').get(dataController.getData);
