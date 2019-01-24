@@ -142,7 +142,41 @@ var expertController = {
 	}
 };
 
-// POST curl localhost:7000/addExpert -X POST -H "Content-Type:application/json" -d '{"username":"种植户甲","post_time":"2019.1.24","title":"我家藤椒遇到了大规模锈病","description":"我家的藤椒在9月份的时候，不知道怎么回事最近就得了锈病了，叶子上全是锈斑，专家可以解答一下吗?","expert_name":"专家乙","reply_time":"2019.1.27","reply":"建议你在种植的时候预防锈病，不要让土壤水分太高。另外9月份本来就是锈病高爆发的时期，所以希望在这个时间段可以做好心里准备来应对灾害"}'
+// POST curl http://47.52.132.146:7000/addExpert -X POST -H "Content-Type:application/json" -d '{"username":"种植户大佬","post_time":"2018.9.7","title":"我的藤椒收成达不到预期怎么办","description":"我今年刚刚开始种植藤椒，收益远达不到预期，但是不知道哪一步弄错了，完全是按照百度上的攻略来种植的，请问一下专家能否详细指点一下？","expert_name":"藤椒大师","reply_time":"2018.10.1","reply":"藤椒收益本来就是每年都不一样，今年的季节反常，确实会导致收成大幅下降。然而注意保湿保温，控制温度在10摄氏度以上，湿度在70%以上，基本上都会得到正常收益。当然也有可能跟当地的土壤有关系，具体情况要具体分析。"}'
+
+var wikiSchema = mongoose.Schema({
+	post_time: String,
+	title: String,
+	description: String,
+	image: String,
+	thumbs_up: String,
+	content: String,
+
+});
+var Wiki = mongoose.model("wiki", wikiSchema);
+
+var wikiController = {
+	getWiki: function(req,res,next){
+		Wiki.find().exec(function(err,docs){
+			console.log("获取用户资料成功");
+			return res.json(docs);
+		});
+	},
+	addWiki: function(req,res,next){
+		var wiki = new Wiki(req.body);
+		console.log(req.body);
+		wiki.save(function(err,docs){
+			console.log(docs);
+			return res.json(docs);
+		});
+	},
+	thumbs_upForWiki: function(req,res,next){
+		return res.json(req.body);
+	}
+};
+
+// POST curl http://47.52.132.146:7000/addWiki -X POST -H "Content-Type:application/json" -d '{"post_time":"2018.10.17","title":"藤椒的基本情况","description":"关于藤椒的简单介绍，来源百度百科，方便不了解的人简单了解下藤椒","expert_name":"藤椒百科团队","thumbs_up":"0","content":"藤椒，中文学名：竹叶花椒（拉丁学名：Zanthoxylum armatum DC.），别称：万花针、白总管、竹叶总管（江西、湖南）等。由于其枝叶披散，延长状若藤蔓，故称藤椒；多年生灌木，高3-5米的落叶小乔木；茎枝多锐刺，叶面稍粗皱；或为椭圆形，小叶柄甚短或无柄。花序近腋生或同时生于侧枝之顶，果紫红色，有微凸起少数油点，种子径3-4毫米，褐黑色。花期4-5月，果期8-10月。主要分布于中国大陆西南、华东、华中及华北等地。"}'
+// POST curl localhost:7000/addWiki -X POST -H "Content-Type:application/json" -d '{"post_time":"2018.10.17","title":"藤椒的基本情况","description":"关于藤椒的简单介绍，来源百度百科，方便不了解的人简单了解下藤椒","expert_name":"藤椒百科团队","thumbs_up":"0","content":"藤椒，中文学名：竹叶花椒（拉丁学名：Zanthoxylum armatum DC.），别称：万花针、白总管、竹叶总管（江西、湖南）等。由于其枝叶披散，延长状若藤蔓，故称藤椒；多年生灌木，高3-5米的落叶小乔木；茎枝多锐刺，叶面稍粗皱；或为椭圆形，小叶柄甚短或无柄。花序近腋生或同时生于侧枝之顶，果紫红色，有微凸起少数油点，种子径3-4毫米，褐黑色。花期4-5月，果期8-10月。主要分布于中国大陆西南、华东、华中及华北等地。"}'
 
 
 // ====
@@ -251,6 +285,14 @@ var userController = {
 app.route('/addExpert').post(expertController.addExpert);
 
 app.route('/getExpert').get(expertController.getExpert);
+
+
+
+app.route('/addWiki').post(wikiController.addWiki);
+
+app.route('/getWiki').get(wikiController.getWiki);
+
+
 
 
 app.route('/addUser').post(userController.addUser);
