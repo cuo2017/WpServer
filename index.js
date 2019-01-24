@@ -151,7 +151,7 @@ var wikiSchema = mongoose.Schema({
 	image: String,
 	thumbs_up: String,
 	content: String,
-
+	kind: String,
 });
 var Wiki = mongoose.model("wiki", wikiSchema);
 
@@ -175,8 +175,9 @@ var wikiController = {
 	}
 };
 
-// POST curl http://47.52.132.146:7000/addWiki -X POST -H "Content-Type:application/json" -d '{"post_time":"2018.10.17","title":"藤椒的基本情况","description":"关于藤椒的简单介绍，来源百度百科，方便不了解的人简单了解下藤椒","expert_name":"藤椒百科团队","thumbs_up":"0","content":"藤椒，中文学名：竹叶花椒（拉丁学名：Zanthoxylum armatum DC.），别称：万花针、白总管、竹叶总管（江西、湖南）等。由于其枝叶披散，延长状若藤蔓，故称藤椒；多年生灌木，高3-5米的落叶小乔木；茎枝多锐刺，叶面稍粗皱；或为椭圆形，小叶柄甚短或无柄。花序近腋生或同时生于侧枝之顶，果紫红色，有微凸起少数油点，种子径3-4毫米，褐黑色。花期4-5月，果期8-10月。主要分布于中国大陆西南、华东、华中及华北等地。"}'
-// POST curl localhost:7000/addWiki -X POST -H "Content-Type:application/json" -d '{"post_time":"2018.10.17","title":"藤椒的基本情况","description":"关于藤椒的简单介绍，来源百度百科，方便不了解的人简单了解下藤椒","expert_name":"藤椒百科团队","thumbs_up":"0","content":"藤椒，中文学名：竹叶花椒（拉丁学名：Zanthoxylum armatum DC.），别称：万花针、白总管、竹叶总管（江西、湖南）等。由于其枝叶披散，延长状若藤蔓，故称藤椒；多年生灌木，高3-5米的落叶小乔木；茎枝多锐刺，叶面稍粗皱；或为椭圆形，小叶柄甚短或无柄。花序近腋生或同时生于侧枝之顶，果紫红色，有微凸起少数油点，种子径3-4毫米，褐黑色。花期4-5月，果期8-10月。主要分布于中国大陆西南、华东、华中及华北等地。"}'
+// POST curl http://47.52.132.146:7000/addWiki -X POST -H "Content-Type:application/json" -d '{"kind":"0","post_time":"2018.10.17","title":"藤椒的基本情况","description":"关于藤椒的简单介绍，来源百度百科，方便不了解的人简单了解下藤椒","expert_name":"藤椒百科团队","thumbs_up":"0","content":"藤椒，中文学名：竹叶花椒（拉丁学名：Zanthoxylum armatum DC.），别称：万花针、白总管、竹叶总管（江西、湖南）等。由于其枝叶披散，延长状若藤蔓，故称藤椒；多年生灌木，高3-5米的落叶小乔木；茎枝多锐刺，叶面稍粗皱；或为椭圆形，小叶柄甚短或无柄。花序近腋生或同时生于侧枝之顶，果紫红色，有微凸起少数油点，种子径3-4毫米，褐黑色。花期4-5月，果期8-10月。主要分布于中国大陆西南、华东、华中及华北等地。"}'
+
+// POST curl localhost:7000/addWiki -X POST -H "Content-Type:application/json" -d '{"kind":"0","post_time":"2018.10.17","title":"藤椒的基本情况","description":"关于藤椒的简单介绍，来源百度百科，方便不了解的人简单了解下藤椒","expert_name":"藤椒百科团队","thumbs_up":"0","content":"藤椒，中文学名：竹叶花椒（拉丁学名：Zanthoxylum armatum DC.），别称：万花针、白总管、竹叶总管（江西、湖南）等。由于其枝叶披散，延长状若藤蔓，故称藤椒；多年生灌木，高3-5米的落叶小乔木；茎枝多锐刺，叶面稍粗皱；或为椭圆形，小叶柄甚短或无柄。花序近腋生或同时生于侧枝之顶，果紫红色，有微凸起少数油点，种子径3-4毫米，褐黑色。花期4-5月，果期8-10月。主要分布于中国大陆西南、华东、华中及华北等地。"}'
 
 
 // ====
