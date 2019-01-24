@@ -162,6 +162,37 @@ var wikiController = {
 			return res.json(docs);
 		});
 	},
+	getWiki0: function(req,res,next){
+		Wiki.find({"kind":"0"}).exec(function(err,docs){
+			console.log("获取用户资料成功");
+			return res.json(docs);
+		});
+	},
+	getWiki1: function(req,res,next){
+		Wiki.find({"kind":"1"}).exec(function(err,docs){
+			console.log("获取用户资料成功");
+			return res.json(docs);
+		});
+	},
+	getWiki2: function(req,res,next){
+		Wiki.find({"kind":"2"}).exec(function(err,docs){
+			console.log("获取用户资料成功");
+			return res.json(docs);
+		});
+	},
+	getWiki3: function(req,res,next){
+		Wiki.find({"kind":"3"}).exec(function(err,docs){
+			console.log("获取用户资料成功");
+			return res.json(docs);
+		});
+	},
+	getWiki4: function(req,res,next){
+		Wiki.find({"kind":"4"}).exec(function(err,docs){
+			console.log("获取用户资料成功");
+			return res.json(docs);
+		});
+	},
+
 	addWiki: function(req,res,next){
 		var wiki = new Wiki(req.body);
 		console.log(req.body);
@@ -291,7 +322,11 @@ app.route('/getExpert').get(expertController.getExpert);
 
 app.route('/addWiki').post(wikiController.addWiki);
 
-app.route('/getWiki').get(wikiController.getWiki);
+app.route('/getWiki0').get(wikiController.getWiki0);
+app.route('/getWiki1').get(wikiController.getWiki1);
+app.route('/getWiki2').get(wikiController.getWiki2);
+app.route('/getWiki3').get(wikiController.getWiki3);
+app.route('/getWiki4').get(wikiController.getWiki4);
 
 
 
