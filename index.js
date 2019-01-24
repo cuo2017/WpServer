@@ -82,23 +82,6 @@ var db = mongoose.connect("mongodb://127.0.0.1:27017/wpserver");
 
 var dataController = {
 	getData: function(req,res,next){
-		var exec = require('child_process').exec;
-		// var cmdStr1 = "curl -i -X POST 'http://aliv8.data.moji.com/whapi/json/aliweather/shortforecast'  -H 'Authorization:APPCODE 9a4b7288c78c4da9a68d72e8a916b762' --data 'lat=31.333467&lon=104.862946&token=bbc0fdc738a3877f3f72f69b1a4d30fe'";
-		var cmdStr2 = "curl http://47.52.132.146/getDataBySys1";
-		var cmdStr3 = "curl -i -X POST 'http://aliv8.data.moji.com/whapi/json/aliweather/forecast15days'  -H 'Authorization:APPCODE 9a4b7288c78c4da9a68d72e8a916b762' --data 'lat=31.333467&lon=104.862946&token=7538f7246218bdbf795b329ab09cc524'";
-		// var data = {
-		// 	city: '',
-		// };
-		// exec(cmdStr3,function(err,stdout,stderr){
-		// 	if(err){
-		// 		console.log('get weather api error:'+stderr);
-		// 	}else{
-		// 		// var result = JSON.parse(stdout);
-		// 		var result = stdout;
-		// 		console.log("得到输出" + result[4]);
-		// 		return res.json(result);
-		// 	}
-		// });
 		var clientServerOptions = {
 	        url: 'https://api.seniverse.com/v3/weather/now.json?key=5dj6pbdppzrc72kp&location=mianyang&language=zh-Hans&unit=c',
 	        method: 'GET',
@@ -128,6 +111,38 @@ var dataController = {
 	}
 }
 
+var expertSchema = mongoose.Schema({
+	user_icon: String,
+	username: String,
+	post_time: String,
+	title: String,
+	description: String,
+	image: String,
+	expert_name: String,
+	expert_icon: String,
+	reply_time: String,
+	reply: String,
+});
+var Expert = mongoose.model("expert", expertSchema);
+
+var expertController = {
+	getExpert: function(req,res,next){
+		Expert.find().exec(function(err,docs){
+			console.log("获取用户资料成功");
+			return res.json(docs);
+		});
+	},
+	addExpert: function(req,res,next){
+		var expert = new Expert(req.body);
+		console.log(req.body);
+		expert.save(function(err,docs){
+			console.log(docs);
+			return res.json(docs);
+		});
+	}
+};
+
+// POST curl localhost:7000/addExpert -X POST -H "Content-Type:application/json" -d '{"username":"种植户甲","post_time":"2019.1.24","title":"我家藤椒遇到了大规模锈病","description":"我家的藤椒在9月份的时候，不知道怎么回事最近就得了锈病了，叶子上全是锈斑，专家可以解答一下吗?","expert_name":"专家乙","reply_time":"2019.1.27","reply":"建议你在种植的时候预防锈病，不要让土壤水分太高。另外9月份本来就是锈病高爆发的时期，所以希望在这个时间段可以做好心里准备来应对灾害"}'
 
 
 // ====
@@ -233,6 +248,11 @@ var userController = {
 
 
 // }
+app.route('/addExpert').post(expertController.addExpert);
+
+app.route('/getExpert').get(expertController.getExpert);
+
+
 app.route('/addUser').post(userController.addUser);
 
 app.route('/getUser').get(userController.getUser);
