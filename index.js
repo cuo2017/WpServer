@@ -82,30 +82,31 @@ var db = mongoose.connect("mongodb://127.0.0.1:27017/wpserver");
 
 var dataController = {
 	getData: function(req,res,next){
-		var clientServerOptions = {
-	        url: 'https://api.seniverse.com/v3/weather/now.json?key=5dj6pbdppzrc72kp&location=mianyang&language=zh-Hans&unit=c',
-	        method: 'GET',
-	    }
-	    request(clientServerOptions, function (error, response) {
-	        var data = JSON.parse(response.body);
-	        var data2 = data.results[0];
-	        var instant_data = {
-				location: data2.location.name,
-				weather: data2.now.text,
-				temp: data2.now.temperature,
-				feel: data2.now.feels_like,
-				pressure: data2.now.pressure,
-				humidity: data2.now.humidity,
-				visibility: data2.now.visibility,
-				wind_direction: data2.now.wind_direction,
-				wind_direction_degree: data2.now.wind_direction_degree,
-				wind_speed: data2.now.wind_speed,
-				wind_scale: data2.now.wind_scale,
-				update_time: data2.last_update,
-			}
-	        console.log(instant_data);
-	        return res.json(instant_data);
-	    });
+		// var clientServerOptions = {
+	 //        url: 'https://api.seniverse.com/v3/weather/now.json?key=5dj6pbdppzrc72kp&location=mianyang&language=zh-Hans&unit=c',
+	 //        method: 'GET',
+	 //    }
+	 //    request(clientServerOptions, function (error, response) {
+	 //        var data = JSON.parse(response.body);
+	 //        var data2 = data.results[0];
+	 //        var instant_data = {
+		// 		location: data2.location.name,
+		// 		weather: data2.now.text,
+		// 		temp: data2.now.temperature,
+		// 		feel: data2.now.feels_like,
+		// 		pressure: data2.now.pressure,
+		// 		humidity: data2.now.humidity,
+		// 		visibility: data2.now.visibility,
+		// 		wind_direction: data2.now.wind_direction,
+		// 		wind_direction_degree: data2.now.wind_direction_degree,
+		// 		wind_speed: data2.now.wind_speed,
+		// 		wind_scale: data2.now.wind_scale,
+		// 		update_time: data2.last_update,
+		// 	}
+	 //        console.log(instant_data);
+	 //        return res.json(instant_data);
+	 //    });
+	 return;
 
 		
 	}
